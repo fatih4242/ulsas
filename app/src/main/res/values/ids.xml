@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="materialName1" type="id"/>
+    <item name="materialCount1" type="id"/>
+    <item name="materialSerialNo1" type="id"/>
+
+    <item name="materialName2" type="id"/>
+    <item name="materialCount2" type="id"/>
+    <item name="materialSerialNo2" type="id"/>
+
+    <item name="materialName3" type="id"/>
+    <item name="materialCount3" type="id"/>
+    <item name="materialSerialNo3" type="id"/>
+
+    <item name="materialName4" type="id"/>
+    <item name="materialCount4" type="id"/>
+    <item name="materialSerialNo4" type="id"/>
+
+    <item name="materialName5" type="id"/>
+    <item name="materialCount5" type="id"/>
+    <item name="materialSerialNo5" type="id"/>
+
+    <item name="materialName6" type="id"/>
+    <item name="materialCount6" type="id"/>
+    <item name="materialSerialNo6" type="id"/>
+
+    <item name="materialName7" type="id"/>
+    <item name="materialCount7" type="id"/>
+    <item name="materialSerialNo7" type="id"/>
+
+    <item name="materialName8" type="id"/>
+    <item name="materialCount8" type="id"/>
+    <item name="materialSerialNo8" type="id"/>
+
+    <item name="materialName9" type="id"/>
+    <item name="materialCount9" type="id"/>
+    <item name="materialSerialNo9" type="id"/>
+</resources>
+
+<!--
+android:id="@+id/materialName0"
+android:id="@+id/materialCount0"
+android:id="@+id/materialSerialNo0"
+-->

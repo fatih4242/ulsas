@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".modules.main.view.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/signViewLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/signImage"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@drawable/sign_background_image"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signSaveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signImage"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            android:text="@string/save"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signClearBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signSaveBtn"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:text="@string/clear"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/raporLayout"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Hizmet Verilen Kurum -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Firma/Kurum"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="30sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/servicedName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/servicedAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tel_fax"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/servicedTelFax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bildirilen ve Tesbit Edilen Arıza"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reportedMalfunction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
+            <!-- Servis İsteği Alan -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Servis İsteği Alan"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="30sp"
+                    android:textColor="@color/black" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name_surname"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestNameSurname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Garantili"/>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/serviceRequestGuarantee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Garanti Dışı"/>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/serviceRequestOutOfWarranty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/capacity"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestCapacity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/serial_no"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestSerialNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/brand"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestBrand"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/weighing_machine"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestWeighingMachine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/lc_type"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestLCType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/indicator_type"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestIndicatorType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/power_source"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/serviceRequestPowerSource"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+            <!-- Damga Kontrol -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Damga Kontrol"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="30sp"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Kalibrasyon Kilidi kapalı mı?"/>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/stampControlIsTheCalibrationLockClosed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Stiker var mı?"/>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/stampControlStickerExists"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="J.Box - İndikatör Mühürlü mü?"/>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/stampControlIsBoxIndicatorStamped"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Loadcell Konnektörü Mühürlü mü?"/>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/stampControlIsLoadcellConnectorStamped"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Damga Durumu"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="30sp"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Son"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/stampStatusLast"
+                        android:inputType="datetime"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Gelecek"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/stampStatusFuture"
+                        android:inputType="datetime"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <!-- Servis Personeli Tarafından Doldurulacaktır -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servis Personeli Tarafından Doldurulacaktır"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="30sp"
+                android:textColor="@color/black" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Servis Bakım Personeli"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/serviceMaintenancePersonnel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Servis - Bakım Başlama ve Bitiş Tarihleri"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/serviceStartDateTime"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:inputType="datetime"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/serviceEndDateTime"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:inputType="datetime"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Servis - Bakım Esnasında Yapılan İşlemler"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/transactionsMadeInTheService"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            <!-- Değiştirilen / Teslim Edilen Malzemeler -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Değiştirilen / Teslim Edilen Malzemeler"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:id="@+id/changing_materials_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <!-- TABLE Head -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Malzeme Adı"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Miktarı"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Seri Nosu ve Açıklama"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/materialName0"
+                            android:tag="materialName0"
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/materialCount0"
+                            android:tag="materialCount0"
+
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/materialSerialNo0"
+                            android:tag="materialSerialNo0"
+
+                            android:layout_width="0px"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:textAlignment="center"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/addMaterialLineBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/plus_icon" />
+            </LinearLayout>
+
+            <!-- Teslim -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Servis bakım raporunda tanımlanan Arıza / Sistem / Cihaz ilgili personel tarafından belirtilen malzemelerin de kullanılmasıyla onarılmış, bakımı yapılmış ve çalışır vaziyette teslim alınmıştır."
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Kurum adına"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/deliveryName"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="@string/date"/>
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/deliveryDate"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:inputType="datetime" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/signBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="imza"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="30sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Önce"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/beforeRaporImage0"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/beforeRaporImage1"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/beforeRaporImage2"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/beforeRaporImage3"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sonrası"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="30sp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/afterRaporImage0"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/afterRaporImage1"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/afterRaporImage2"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/afterRaporImage3"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/photo_icon"/>
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/uploadBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/red"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:text="Yükle"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

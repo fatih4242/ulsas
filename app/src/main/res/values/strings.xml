@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Ulsas</string>
+    <string name="password">Şifre</string>
+    <string name="email">E-posta</string>
+    <string name="login">Giriş Yap</string>
+    <string name="welcome_back">Tekrardan \nHoşgeldiniz!</string>
+    <string name="name">adı</string>
+    <string name="address">Adresi</string>
+    <string name="tel_fax">Tel/Fax</string>
+    <string name="name_surname">Adı Soyadı</string>
+    <string name="warranty">Garantili</string>
+    <string name="capacity">Kapasite</string>
+    <string name="serial_no">Seri no</string>
+    <string name="brand">Markası</string>
+    <string name="weighing_machine">Tartı Aleti</string>
+    <string name="lc_type">LC Tipi</string>
+    <string name="indicator_type">İndikatör Tipi</string>
+    <string name="power_source">Güç Kaynağı</string>
+    <string name="date">Tarih</string>
+    <string name="save">Kayıt et</string>
+    <string name="clear">Temizle</string>
+</resources>
