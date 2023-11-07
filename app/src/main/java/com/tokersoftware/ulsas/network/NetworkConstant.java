@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkConstant {
 
-    protected static String BASE_URL = "https://ulsas.tokeryazilim.com/";
+    protected static String BASE_URL = "{URL}";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(){
