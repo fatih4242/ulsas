@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -27,12 +29,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -56,6 +61,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,15 +87,16 @@ public class MainActivity extends AppCompatActivity {
             serviceRequestPowerSource, serviceMaintenancePersonnel;
 
     CheckBox serviceRequestGuarantee, serviceRequestOutOfWarranty,
-            stampControlIsTheCalibrationLockClosed, stampControlStickerExists,
+            stampControlIsTheCalibrationLockClosed,
             stampControlIsBoxIndicatorStamped, stampControlIsLoadcellConnectorStamped;
 
-    EditText materialName0, materialCount0, materialSerialNo0,
-            stampStatusLast, stampStatusFuture, serviceStartDateTime,
-            serviceEndDateTime, transactionsMadeInTheService, deliveryName, deliveryDate;
+    EditText materialName0, materialCount0, materialSerialNo0, transactionsMadeInTheService, deliveryName, stampControlOldSticker, stampControlNewSticker;
 
     ImageView beforeImage0, beforeImage1, beforeImage2, beforeImage3,
-            afterImage0, afterImage1, afterImage2, afterImage3;
+            afterImage0, afterImage1, afterImage2, afterImage3, signPrevImageView;
+
+    TextView stampStatusLast, stampStatusFuture, serviceStartDate, serviceStartTime,
+            serviceEndDate, serviceEndTime, deliveryDate;
 
 
 
@@ -106,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Variables
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR);
+    int month = calendar.get(Calendar.MONTH);
+    int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
     int countOfMaterialLines = 0;
 
     ArrayList<Material> materialList;
@@ -125,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init(){
+
         //ProgressDialogManager
         progressDialogManager = new ProgressDialogManager(this);
 
@@ -137,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
         imageArrayBefore.add(2, "");
         imageArrayBefore.add(3, "");
 
-
         imageArrayAfter = new ArrayList<>();
         imageArrayAfter.add(0, "");
         imageArrayAfter.add(1, "");
@@ -146,18 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //ViewModel
-        viewModel = new MainViewModel(this);
-
-        //Check for if the email and password is correct
-        viewModel.isSigned(new ResponseI() {
-            @Override
-            public void responseFromDB(ErrorMessage errorMessage) {
-                if (errorMessage.getError() == 1){
-                    startActivity(new Intent(activity, LoginActivity.class));
-                    finish();
-                }
-            }
-        });
+        viewModel = new MainViewModel();
 
         //Views
         changingMaterialsLayout = findViewById(R.id.changing_materials_layout);
@@ -170,12 +171,16 @@ public class MainActivity extends AppCompatActivity {
         signImage = findViewById(R.id.signImage);
         uploadBtn = findViewById(R.id.uploadBtn);
 
+        signPrevImageView = findViewById(R.id.signPrevImageView);
 
-        //Edit Text
+
         stampStatusLast = findViewById(R.id.stampStatusLast);
         stampStatusFuture = findViewById(R.id.stampStatusFuture);
-        serviceStartDateTime = findViewById(R.id.serviceStartDateTime);
-        serviceEndDateTime = findViewById(R.id.serviceEndDateTime);
+        serviceStartDate = findViewById(R.id.serviceStartDate);
+        serviceStartTime = findViewById(R.id.serviceStartTime);
+        serviceEndDate = findViewById(R.id.serviceEndDate);
+        serviceEndTime = findViewById(R.id.serviceEndTime);
+
         transactionsMadeInTheService = findViewById(R.id.transactionsMadeInTheService);
         deliveryName = findViewById(R.id.deliveryName);
         deliveryDate = findViewById(R.id.deliveryDate);
@@ -200,7 +205,8 @@ public class MainActivity extends AppCompatActivity {
         serviceRequestGuarantee = findViewById(R.id.serviceRequestGuarantee);
         serviceRequestOutOfWarranty = findViewById(R.id.serviceRequestOutOfWarranty);
         stampControlIsTheCalibrationLockClosed = findViewById(R.id.stampControlIsTheCalibrationLockClosed);
-        stampControlStickerExists = findViewById(R.id.stampControlStickerExists);
+        stampControlOldSticker = findViewById(R.id.oldNumberStickers);
+        stampControlNewSticker = findViewById(R.id.newNumberStickers);
         stampControlIsBoxIndicatorStamped = findViewById(R.id.stampControlIsBoxIndicatorStamped);
         stampControlIsLoadcellConnectorStamped = findViewById(R.id.stampControlIsLoadcellConnectorStamped);
 
@@ -253,6 +259,8 @@ public class MainActivity extends AppCompatActivity {
         signSaveBtn.setOnClickListener( v -> {
             if (canvas != null){
                 if (canvas.getSaveCount() > 0 ){
+                    signPrevImageView.setVisibility(View.VISIBLE);
+                    signPrevImageView.setImageBitmap(bitmap);
                     openSignBtn.setText("İmzayı Düzelt");
                 }
             }
@@ -261,7 +269,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         signClearBtn.setOnClickListener( v -> {
-           canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+            signPrevImageView.setVisibility(View.GONE);
+            canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+
         });
 
         //Adding material Edit Text line MAX Value is 10
@@ -272,6 +282,95 @@ public class MainActivity extends AppCompatActivity {
 
             } else addMaterialLineBtn.setVisibility(View.GONE);
         });
+
+        deliveryDate.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    deliveryDate.setText(dayOfMonth + "/" + month + "/" + year);
+
+                }
+            }, year,month, dayOfMonth);
+            datePickerDialog.show();
+        });
+
+        stampStatusLast.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    stampStatusLast.setText(String.valueOf(year));
+                }
+            }, year,month, dayOfMonth);
+            datePickerDialog.show();
+        });
+
+        stampStatusFuture.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                    stampStatusFuture.setText(dayOfMonth + "/" + month + "/" + year);
+                }
+            }, year,month, dayOfMonth);
+            datePickerDialog.show();
+        });
+
+        serviceStartDate.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    serviceStartDate.setText(dayOfMonth + "/" + month + "/" + year);
+                }
+            }, year,month, dayOfMonth);
+            datePickerDialog.show();
+        });
+
+        serviceStartTime.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    serviceStartTime.setText(hourOfDay + ":" + minute);
+                }
+            }, 0, 0, true);
+            timePickerDialog.show();
+        });
+
+        serviceEndDate.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    serviceEndDate.setText(dayOfMonth + "/" + month + "/" + year);
+                }
+            }, year,month, dayOfMonth);
+            datePickerDialog.show();
+        });
+
+        serviceEndTime.setOnClickListener(v -> {
+            TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    serviceEndTime.setText(hourOfDay + ":" + minute);
+                }
+            }, 0, 0, true);
+            timePickerDialog.show();
+        });
+
+        serviceRequestGuarantee.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
+                    serviceRequestOutOfWarranty.setChecked(false);
+            }
+        });
+        serviceRequestOutOfWarranty.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
+                    serviceRequestGuarantee.setChecked(false);
+            }
+        });
         
         uploadBtn.setOnClickListener( v -> {
             if (NetworkManager.isConnectedToNetwork(activity)){
@@ -281,7 +380,6 @@ public class MainActivity extends AppCompatActivity {
             } else Toast.makeText(activity, "Lütfen İnternet bağlantınızı kontrol ediniz", Toast.LENGTH_SHORT).show();
 
         });
-
 
     }
 
@@ -365,14 +463,15 @@ public class MainActivity extends AppCompatActivity {
                serviceRequestIndicatorType.getText().toString(),
                serviceRequestPowerSource.getText().toString(),
                String.valueOf(stampControlIsTheCalibrationLockClosed.isChecked()),
-               String.valueOf(stampControlStickerExists.isChecked()),
+               stampControlOldSticker.getText().toString(),
+               stampControlNewSticker.getText().toString(),
                String.valueOf(stampControlIsBoxIndicatorStamped.isChecked()),
                String.valueOf(stampControlIsLoadcellConnectorStamped.isChecked()),
                stampStatusLast.getText().toString(),
                stampStatusFuture.getText().toString(),
                serviceMaintenancePersonnel.getText().toString(),
-               serviceStartDateTime.getText().toString(),
-               serviceEndDateTime.getText().toString(),
+               serviceStartDate.getText().toString() + " " + serviceStartTime.getText().toString(),
+               serviceEndDate.getText().toString() + " " + serviceEndTime.getText().toString(),
                transactionsMadeInTheService.getText().toString(),
                materialArray,
                deliveryName.getText().toString(),
@@ -422,7 +521,10 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (serviceRequestSerialNo.getText().toString().isEmpty()){
             Toast.makeText(activity, "Lütfen Servis İsteği Alan Seri no kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
-        return false;
+            return false;
+        }else if (!serviceRequestGuarantee.isChecked() && !serviceRequestOutOfWarranty.isChecked()){
+            Toast.makeText(activity, "Lütfen Garanti Garanti Değil kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
+            return false;
         } else if (serviceRequestBrand.getText().toString().isEmpty()){
             Toast.makeText(activity, "Lütfen Servis İsteği Alan Marka kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
             return false;
@@ -455,11 +557,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(activity, "Lütfen Servis Bakım Personeli kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if (serviceStartDateTime.getText().toString().isEmpty()){
+        } else if (serviceStartDate.getText().toString().isEmpty() && serviceStartTime.getText().toString().isEmpty()){
             Toast.makeText(activity, "Lütfen Servis - Bakım Başlama Tarihi kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
             return false;
 
-        } else if (serviceEndDateTime.getText().toString().isEmpty()){
+        } else if (stampControlOldSticker.getText().toString().isEmpty()){
+            Toast.makeText(activity, "Lütfen Eski Stiker Adedi kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
+            return false;
+
+        } else if (stampControlNewSticker.getText().toString().isEmpty()){
+            Toast.makeText(activity, "Lütfen Yeni Stiker Adedi kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
+            return false;
+
+        } else if (serviceEndDate.getText().toString().isEmpty() && serviceEndTime.getText().toString().isEmpty()){
             Toast.makeText(activity, "Lütfen Servis - Bakım Bitiş Tarihi kısmını tamamlayınız", Toast.LENGTH_SHORT).show();
             return false;
 

@@ -42,8 +42,10 @@ public class Report {
 
     @SerializedName("stamp_control_is_the_calibration_lock_closed")
     String stamp_control_is_the_calibration_lock_closed;
-    @SerializedName("stamp_control_sticker_exists")
-    String stamp_control_sticker_exists;
+    @SerializedName("sticker_before")
+    String sticker_before;
+    @SerializedName("sticker_after")
+    String sticker_after;
     @SerializedName("stamp_control_is_box_indicator_stamped")
     String stamp_control_is_box_indicator_stamped;
     @SerializedName("stamp_control_is_loadcell_connector_stamped")
@@ -76,7 +78,7 @@ public class Report {
     String delivery_images_after;
 
 
-    public Report(String serviced_name, String serviced_address, String serviced_tel_fax, String reported_mal_function, String service_request_name_surname, String service_request_guarantee, String service_request_out_of_warranty, String service_request_capacity, String service_request_serial_no, String service_request_brand, String service_request_weighing_machine, String service_request_lc_type, String service_request_indicator_type, String service_request_power_source, String stamp_control_is_the_calibration_lock_closed, String stamp_control_sticker_exists, String stamp_control_is_box_indicator_stamped, String stamp_control_is_loadcell_connector_stamped, String stamp_status_last, String stamp_status_future, String service_maintenance_personnel, String service_start_date_time, String service_end_date_time, String transactionsMadeInTheService, String replaced_materials, String delivery_name, String delivery_date, String delivery_signature, String delivery_images_before, String delivery_images_after) {
+    public Report(String serviced_name, String serviced_address, String serviced_tel_fax, String reported_mal_function, String service_request_name_surname, String service_request_guarantee, String service_request_out_of_warranty, String service_request_capacity, String service_request_serial_no, String service_request_brand, String service_request_weighing_machine, String service_request_lc_type, String service_request_indicator_type, String service_request_power_source, String stamp_control_is_the_calibration_lock_closed, String sticker_before, String sticker_after, String stamp_control_is_box_indicator_stamped, String stamp_control_is_loadcell_connector_stamped, String stamp_status_last, String stamp_status_future, String service_maintenance_personnel, String service_start_date_time, String service_end_date_time, String transactionsMadeInTheService, String replaced_materials, String delivery_name, String delivery_date, String delivery_signature, String delivery_images_before, String delivery_images_after) {
         this.serviced_name = serviced_name;
         this.serviced_address = serviced_address;
         this.serviced_tel_fax = serviced_tel_fax;
@@ -92,7 +94,8 @@ public class Report {
         this.service_request_indicator_type = service_request_indicator_type;
         this.service_request_power_source = service_request_power_source;
         this.stamp_control_is_the_calibration_lock_closed = stamp_control_is_the_calibration_lock_closed;
-        this.stamp_control_sticker_exists = stamp_control_sticker_exists;
+        this.sticker_before = sticker_before;
+        this.sticker_after = sticker_after;
         this.stamp_control_is_box_indicator_stamped = stamp_control_is_box_indicator_stamped;
         this.stamp_control_is_loadcell_connector_stamped = stamp_control_is_loadcell_connector_stamped;
         this.stamp_status_last = stamp_status_last;
@@ -107,6 +110,22 @@ public class Report {
         this.delivery_signature = delivery_signature;
         this.delivery_images_before = delivery_images_before;
         this.delivery_images_after = delivery_images_after;
+    }
+
+    public String getSticker_before() {
+        return sticker_before;
+    }
+
+    public void setSticker_before(String sticker_before) {
+        this.sticker_before = sticker_before;
+    }
+
+    public String getSticker_after() {
+        return sticker_after;
+    }
+
+    public void setSticker_after(String sticker_after) {
+        this.sticker_after = sticker_after;
     }
 
     public String getServiced_name() {
@@ -229,13 +248,7 @@ public class Report {
         this.stamp_control_is_the_calibration_lock_closed = stamp_control_is_the_calibration_lock_closed;
     }
 
-    public String getStamp_control_sticker_exists() {
-        return stamp_control_sticker_exists;
-    }
 
-    public void setStamp_control_sticker_exists(String stamp_control_sticker_exists) {
-        this.stamp_control_sticker_exists = stamp_control_sticker_exists;
-    }
 
     public String getStamp_control_is_box_indicator_stamped() {
         return stamp_control_is_box_indicator_stamped;

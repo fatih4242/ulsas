@@ -44,7 +44,8 @@ public interface API {
             @Field("service_request_power_source") String serviceRequestPowerSource,
 
             @Field("stamp_control_is_the_calibration_lock_closed") String stampControlIsTheCalibrationLockClosed,
-            @Field("stamp_control_sticker_exists") String stampControlStickerExists,
+            @Field("sticker_before") String stickerBefore,
+            @Field("sticker_after") String stickerAfter,
             @Field("stamp_control_is_box_indicator_stamped") String stampControlIsBoxIndicatorStamped,
             @Field("stamp_control_is_loadcell_connector_stamped") String stampControlIsLoadcellConnectorStamped,
             @Field("stamp_status_last") String stampStatusLast,

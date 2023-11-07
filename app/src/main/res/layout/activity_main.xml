@@ -349,10 +349,54 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="Stiker var mı?"/>
+                        android:text="Eski Stiker Adedi"/>
+
+                    <EditText
+                        android:id="@+id/oldNumberStickers"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Yeni Stiker Adedi"/>
+
+                    <EditText
+                        android:id="@+id/newNumberStickers"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp">
+
+                    <TextView
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="Loadcell Konnektörü Mühürlü mü?"/>
 
                     <androidx.appcompat.widget.AppCompatCheckBox
-                        android:id="@+id/stampControlStickerExists"
+                        android:id="@+id/stampControlIsLoadcellConnectorStamped"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -373,26 +417,6 @@
 
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/stampControlIsBoxIndicatorStamped"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingStart="5dp">
-
-                    <TextView
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:text="Loadcell Konnektörü Mühürlü mü?"/>
-
-                    <androidx.appcompat.widget.AppCompatCheckBox
-                        android:id="@+id/stampControlIsLoadcellConnectorStamped"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -419,12 +443,12 @@
                         android:textSize="20sp"
                         android:text="Son"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <TextView
                         android:id="@+id/stampStatusLast"
-                        android:inputType="datetime"
                         android:layout_width="0px"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="yyyy"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -441,12 +465,12 @@
                         android:textSize="20sp"
                         android:text="Gelecek"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <TextView
                         android:id="@+id/stampStatusFuture"
-                        android:inputType="datetime"
                         android:layout_width="0px"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="gg/aa/yyyy"/>
                 </LinearLayout>
 
 
@@ -484,55 +508,107 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingStart="5dp">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="0px"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+
                         android:textSize="20sp"
                         android:text="Servis - Bakım Başlama ve Bitiş Tarihleri"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/serviceStartDateTime"
-                        android:layout_width="0px"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:inputType="datetime"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/serviceEndDateTime"
-                        android:layout_width="0px"
-                        android:layout_weight="1"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="datetime"/>
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingStart="5dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0px"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Başlama"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/serviceStartDate"
+                            android:layout_width="0px"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="gg/mm/yyyy"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/serviceStartTime"
+                            android:layout_width="0px"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="00:00"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingStart="5dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0px"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="Bitiş"/>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/serviceEndDate"
+                            android:layout_width="0px"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="gg/mm/yyyy"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/serviceEndTime"
+                            android:layout_width="0px"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:hint="00:00"/>
+                    </LinearLayout>
                 </LinearLayout>
+
+
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:paddingStart="5dp">
 
                     <TextView
-                        android:layout_width="0px"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:text="Servis - Bakım Esnasında Yapılan İşlemler"/>
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/transactionsMadeInTheService"
-                        android:layout_width="0px"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text" />
+                        android:hint="Buraya Yazınız Lütfen"
+
+                        android:gravity="start"
+                        android:padding="10dp"
+                        android:background="@drawable/sign_background_image"
+                        android:inputType="textMultiLine" />
                 </LinearLayout>
 
 
@@ -693,13 +769,19 @@
                         android:textSize="20sp"
                         android:text="@string/date"/>
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/deliveryDate"
                         android:layout_width="0px"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:inputType="datetime" />
+                        android:hint="gg/aa/yyyy" />
                 </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/signPrevImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/signBtn"

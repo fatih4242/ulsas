@@ -16,20 +16,6 @@ import retrofit2.Response;
 
 public class MainViewModel {
 
-    //SharedPreferences
-    LocalDataManager localDataManager;
-
-
-    public MainViewModel(Context context){
-        localDataManager = new LocalDataManager(context);
-    }
-
-    public void isSigned(ResponseI responseI){
-        String emailFromDB = localDataManager.getSharedPreference(LocalDataManager.keys.email.getKey());
-        String passFromDB = localDataManager.getSharedPreference(LocalDataManager.keys.password.getKey());
-
-        LoginManager.signIn(emailFromDB, passFromDB, responseI);
-    }
 
     public void uploadReport(Report report, ResponseI responseI){
         API retrofit = NetworkConstant.getClient().create(API.class);
@@ -50,7 +36,8 @@ public class MainViewModel {
                 report.getService_request_indicator_type(),
                 report.getService_request_power_source(),
                 report.getStamp_control_is_the_calibration_lock_closed(),
-                report.getStamp_control_sticker_exists(),
+                report.getSticker_before(),
+                report.getSticker_after(),
                 report.getStamp_control_is_box_indicator_stamped(),
                 report.getStamp_control_is_loadcell_connector_stamped(),
                 report.getStamp_status_last(),
